@@ -1,0 +1,96 @@
+import { Playercanvas, scoreDisplay } from "./game.js";
+import { Playerscore } from "./player.js";
+
+const fruitSprites = [
+    "public/fruits/boom.png",
+    "public/fruits/apple.png",
+    "public/fruits/avocado.png",
+    "public/fruits/bananas.png",
+    "public/fruits/mango.png",
+    "public/fruits/orange.png",
+    "public/fruits/strawberry.png"
+];
+const SlicedSprites = [
+    "public/fruits/boom-1.png",
+    "public/fruits/apple-1.png",
+    "public/fruits/avocado-1.png",
+    "public/fruits/bananas-1.png",
+    "public/fruits/mango-1.png",
+    "public/fruits/orange-1.png",
+    "public/fruits/strawberry-1.png",
+];
+const boom = document.getElementById('boom');
+    
+export const loadedSprites = fruitSprites.map(src => {
+    const img = new Image();
+    img.src = src;
+    return img;
+});
+export const loadedSliced = SlicedSprites.map(src => {
+    const img = new Image();
+    img.src = src;
+    return img;
+});
+
+export class Fruit {
+    constructor(x, y, initialVelocityX, initialVelocityY,spriteindex) {
+        this.x = x;
+        this.y = y;
+        this.velocityX = initialVelocityX;
+        this.velocityY = initialVelocityY;
+        this.gravity = 0.2; 
+        this.radius = 50;
+        this.spriteindex =spriteindex;
+        this.sprite =loadedSprites[this.spriteindex];
+        this.spriteLeft=loadedSliced[spriteindex];
+        this.spriteRight;
+        this.isSliced = false;
+        this.boom = boom;
+    }
+   
+
+    draw(ctx) {
+        if (!this.isSliced) {
+            ctx.drawImage(this.sprite, this.x - this.radius, this.y - this.radius, this.radius * 2.5, this.radius * 2.5);
+        }else if(this.isSliced){
+            ctx.drawImage(this.spriteLeft, this.x - this.radius, this.y - this.radius, this.radius * 2.5, this.radius * 2.5);
+            
+        }
+    }
+
+    update() {
+        this.velocityY += this.gravity; 
+        this.x += this.velocityX;
+        this.y += this.velocityY; 
+
+   
+        if (this.x + this.radius > Playercanvas.width || this.x - this.radius < 0) {
+            this.velocityX = -this.velocityX; 
+        }
+
+      
+        if (this.y - this.radius > Playercanvas.height) {
+            this.isSliced = true; 
+        }
+
+    }
+
+    slice() {
+        if(this.spriteindex==0){
+            this.isSliced=true
+            boom.currentTime = 0;
+            boom.play();
+            
+        }else{
+            this.isSliced = true;  
+            scoreDisplay.textContent = `Score: ${Playerscore}`;
+
+            
+        }
+        
+    }
+    reset(){
+        this.x=0;
+        this.y=0;
+    }
+}
