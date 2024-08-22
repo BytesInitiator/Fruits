@@ -96,14 +96,13 @@ function gameLoop() {
     });
     bot.update();
     if(isSpectating){
-        
         scoreDisplay.textContent=`Score: ${botscore}`;
         body.style.backgroundColor='#a01b00';
 
     
     }else{
         scoreDisplay.textContent=`Score: ${Playerscore}`;
-        body.style.backgroundImage='black';
+        body.style.backgroundColor='black';
 
     }
         
@@ -181,7 +180,7 @@ function multiPlayerGame() {
         bottom.style.display = 'flex';
         scoreDisplay.style.display='inline';
         livesImg.style.display='flex';
-        body.style.backgroundImage='black';
+        body.style.backgroundImage='none';
         body.style.backgroundColor='black';
         winnerText.style.display = 'inline';
         BotscoreText.style.display='inline';
