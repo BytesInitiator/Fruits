@@ -78,9 +78,9 @@ function gameLoop() {
             fxList.splice(index, 1); 
         }
     });
-    
-    bot.update();
-    console.log(botscore)
+    if(isMultiPlayer){
+        bot.update();
+     }
     if(isSpectating){
         scoreDisplay.textContent=`Score: ${botscore}`;
         body.style.backgroundColor='#a01b00';
@@ -105,7 +105,7 @@ Playercanvas.addEventListener('mouseup', () => {
 Playercanvas.addEventListener('mousemove', (event) => {
     if (isMouseDown) {
         const currentMousePosition = { x: event.clientX, y: event.clientY };
-        player.handleSlice(currentMousePosition.x, currentMousePosition.y,lastMousePosition.x , lastMousePosition.y);
+        if(isStarted){player.handleSlice(currentMousePosition.x, currentMousePosition.y,lastMousePosition.x , lastMousePosition.y);}
         lastMousePosition = currentMousePosition;
     }
 });
@@ -117,7 +117,10 @@ Playercanvas.addEventListener('touchstart', (event) => {
 Playercanvas.addEventListener('touchmove', (event) => {
     if(isTouchStarted){
         const touchNew = event.touches[0];
-        player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
+        if(isStarted){
+            player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
+        }
+        
     }
 });
 Playercanvas.addEventListener('touchend', (event) => {
@@ -195,7 +198,7 @@ export function botgameOver(ctx){ // if bots game is over
     ui.onBotGameover();
     ctx.clearRect(0, 0, botCanvas.width, botCanvas.height);
     botgameisOver = true;
-    isStarted=false;
+
     
 }
 
