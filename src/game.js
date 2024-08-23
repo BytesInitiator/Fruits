@@ -309,3 +309,21 @@ function toggleMute() {
         muteButton.style.backgroundImage='url(public/unmute.png';
 
     }}
+    function openFullscreen() {
+        let elem = document.documentElement; // This targets the entire document (web page)
+        
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+    }
+    
+    // Automatically trigger fullscreen when the page loads
+    window.onload = function() {
+        openFullscreen();
+    };
