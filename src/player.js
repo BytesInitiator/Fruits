@@ -1,6 +1,6 @@
 
 import { Fruit, loadedSprites } from './fruit.js';
-import { gameOver, Playercanvas, SlashFX, fxList, Playercanvaswidth, Playercanvasheight, playerCtx, pointToLineDistance } from './game.js';
+import { gameOver, Playercanvas, SlashFX, fxList, playerCtx, pointToLineDistance } from './game.js';
 
 let fruits=[];
 export var Playerscore=0;
@@ -29,7 +29,7 @@ export class Player {
                         gameOver(playerCtx,Playercanvas);
                     }else{
                         Playerscore+=10;
-                        console.log(Playerscore);
+
                         fruit.isSliced = true;
                    
                     }
@@ -52,19 +52,19 @@ export class Player {
     
         if (side === 0) {
     
-            x = Math.random() * Playercanvaswidth;
-            y =  Playercanvasheight-100; 
+            x = Math.random() *Playercanvas.width;
+            y =  Playercanvas.height-100; 
             initialVelocityX = Math.floor(Math.random() * (12 - 11 + 1)) + 11;
             initialVelocityY = -(Math.floor(Math.random() * (12 - 11 + 1)) + 11);; 
         } else if (side === 1) {
     
             x = 50; 
-            y = (Math.random() *  Playercanvasheight)-100;
+            y = (Math.random() *  Playercanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 10);
             initialVelocityY = -(Math.random() * 10);
         } else {
-            x = Playercanvaswidth-50; 
-            y = (Math.random() *Playercanvasheight)-100;
+            x = Playercanvas.width-50; 
+            y = (Math.random() *Playercanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 10); 
             initialVelocityY = -(Math.random() * 10);
         }
@@ -72,12 +72,12 @@ export class Player {
     }
 
     updateAndDrawFruits(backgroundImage) {
-        playerCtx.drawImage(backgroundImage, 0, 0, Playercanvaswidth,  Playercanvasheight);
+        playerCtx.drawImage(backgroundImage, 0, 0, Playercanvas.width,  Playercanvas.height);
    
        fruits.forEach((fruit, index) => {
             fruit.update();
             fruit.draw(playerCtx);
-            if ( fruit.y > Playercanvasheight) {
+            if ( fruit.y > Playercanvas.height) {
                 fruits.splice(index, 1);
                 if( fruit.spriteindex !=0){
                     if(!fruit.isSliced){

@@ -7,7 +7,6 @@ export const gameOverMessage = document.getElementById('gameOverMessage');
 export const livesImg = document.getElementById('lives');
 export const scoreText = document.getElementById('scoreText');
 export const BotscoreText = document.getElementById('BotscoreText');
-export const bottom = document.getElementById('bottom');
 export const menu = document.getElementById('menu');
 export const winnerText = document.getElementById('winner');
 export const scoreDisplay = document.getElementById('scoreDisplay');
@@ -20,7 +19,6 @@ export class UI{
         BotscoreText.style.display='none';
         menu.style.display = 'none';
         gameOverMessage.style.display = 'none';
-        bottom.style.display = 'flex';
         scoreDisplay.style.display='inline';
         livesImg.style.display='flex';
         body.style.backgroundImage='none'
@@ -31,7 +29,6 @@ export class UI{
     onMultiplayer(){
         menu.style.display = 'none';
         gameOverMessage.style.display = 'none';
-        bottom.style.display = 'flex';
         scoreDisplay.style.display='inline';
         livesImg.style.display='flex';
         body.style.backgroundImage='none';
@@ -47,7 +44,6 @@ export class UI{
         menu.style.display = 'flex';
         gameOverMessage.style.display = 'block';
         scoreText.textContent=`Score: ${Playerscore}`;
-        bottom.style.display = 'none';
         body.style.backgroundImage='url(BG.png)'
         body.style.backgroundColor='none';
         if(isMultiPlayer){

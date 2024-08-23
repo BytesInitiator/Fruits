@@ -3,18 +3,15 @@ import { Player, Playerscore } from "./player.js";
 import { body, scoreDisplay, UI } from "./onUI.js";
 
 export const Playercanvas = document.getElementById('gameCanvas');
-Playercanvas.width =(window.innerWidth-100);
-Playercanvas.height = (window.innerHeight);
-export const Playercanvaswidth=Playercanvas.width;
-export const Playercanvasheight=Playercanvas.height;
 export const playerCtx =Playercanvas.getContext('2d');
 
 export const botCanvas = document.getElementById('bot-canvas');
-botCanvas.width =window.innerWidth;
-botCanvas.height = window.innerHeight;
-export const Botcanvaswidth=(Playercanvas.width-100);
-export const Botcanvasheight=(Playercanvas.height);
 export const botCtx =botCanvas.getContext('2d');
+
+Playercanvas.width =(window.innerWidth-100);
+Playercanvas.height = (window.innerHeight-50);
+botCanvas.width =(window.innerWidth-100);
+botCanvas.height = window.innerHeight-50;
 
 //ui Elements
 const SinglePlayerBtn = document.getElementById('singlePlayer');
@@ -81,7 +78,9 @@ function gameLoop() {
             fxList.splice(index, 1); 
         }
     });
+    
     bot.update();
+    console.log(botscore)
     if(isSpectating){
         scoreDisplay.textContent=`Score: ${botscore}`;
         body.style.backgroundColor='#a01b00';
@@ -106,10 +105,7 @@ Playercanvas.addEventListener('mouseup', () => {
 Playercanvas.addEventListener('mousemove', (event) => {
     if (isMouseDown) {
         const currentMousePosition = { x: event.clientX, y: event.clientY };
-        if(isStarted){
-            player.handleSlice(currentMousePosition.x, currentMousePosition.y,lastMousePosition.x , lastMousePosition.y);
-        }
-       
+        player.handleSlice(currentMousePosition.x, currentMousePosition.y,lastMousePosition.x , lastMousePosition.y);
         lastMousePosition = currentMousePosition;
     }
 });
@@ -121,9 +117,7 @@ Playercanvas.addEventListener('touchstart', (event) => {
 Playercanvas.addEventListener('touchmove', (event) => {
     if(isTouchStarted){
         const touchNew = event.touches[0];
-        if(isStarted){
-            player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
-        }
+        player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
     }
 });
 Playercanvas.addEventListener('touchend', (event) => {
@@ -141,19 +135,17 @@ MultiPlayerBtn.addEventListener('click', function(){
 function singlePlayerGame() {
     isMultiPlayer=false;
     if (!isStarted) {
+        setCanvas();
         start.currentTime = 0;
         start.play();
         isMultiPlayer=false;
-
+        clearInterval(PlayergameInterval);
+        clearInterval(BotgameInterval);
         ui.onSinglePlayer();
         enterFullscreen();
-        
         resetLives();
         player.reset();
         bot.reset();
-        bottom.style.opacity=0;
-        clearInterval(PlayergameInterval);
-        clearInterval(BotgameInterval);
         PlayergameInterval = setInterval(player.spawnFruit, 1500);//spawing in every 1.5sec
         BotgameInterval = setInterval(bot.spawnFruit, 1500);//spawing in every 1.5sec
         isSpectating=false;
@@ -164,24 +156,20 @@ function singlePlayerGame() {
 function multiPlayerGame() {
     isMultiPlayer=true;
     if (!isStarted) {
-        
+        setCanvas();
         start.currentTime = 0;
         start.play();
-
+        clearInterval(PlayergameInterval);
+        clearInterval(BotgameInterval)
         enterFullscreen();
-
         ui.onMultiplayer();
-
         player.reset();
         bot.reset();
         resetLives();
-        bottom.style.opacity=0;
-        clearInterval(PlayergameInterval);
-        clearInterval(BotgameInterval);
+        botCanvas.style.display = 'none';
         PlayergameInterval = setInterval(player.spawnFruit, 1500);//spawing in every 1.5sec
         BotgameInterval = setInterval(bot.spawnFruit, 1500);
         isSpectating=false;
-        
         gameLoop();
         isStarted = true;
 }
@@ -328,8 +316,10 @@ function toggleMute() {
             elem.msRequestFullscreen();
         }
     }
+    function setCanvas(){
+    Playercanvas.width =(window.innerWidth-100);
+    Playercanvas.height = (window.innerHeight-50);
+    botCanvas.width =(window.innerWidth-100);
+    botCanvas.height = window.innerHeight-50;
+    }
     
-    // Automatically trigger fullscreen when the page loads
-    window.onload = function() {
-        enterFullscreen();
-    };

@@ -1,6 +1,6 @@
 
 import { Fruit, loadedSprites } from './fruit.js';
-import { Botcanvasheight, Botcanvaswidth, botCtx, botgameOver, fxList, isSpectating, SlashFX } from './game.js';
+import { botCanvas, botCtx, botgameOver, fxList, isSpectating, SlashFX } from './game.js';
 
 
 let fruits = [];
@@ -72,19 +72,19 @@ export class Bot {
     
         if (side === 0) {
     
-            x = Math.random() * Botcanvaswidth;
-            y = Botcanvasheight-100; 
+            x = Math.random() * botCanvas.width;
+            y = botCanvas.height-100; 
             initialVelocityX = (5 + Math.random() * 7);
             initialVelocityY = -(Math.floor(Math.random() * (12 - 11 + 1)) + 11);; 
         } else if (side === 1) {
     
             x = 50; 
-            y = (Math.random() * Botcanvasheight)-100;
+            y = (Math.random() * botCanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 7);
             initialVelocityY = -(Math.random() * 12);
         } else {
-            x =Botcanvaswidth-50; 
-            y = (Math.random() * Botcanvasheight)-100;
+            x =botCanvas.width-50; 
+            y = (Math.random() * botCanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 7); 
             initialVelocityY = -(Math.random() * 12);
         }
@@ -92,12 +92,12 @@ export class Bot {
         
     }
     updateAndDrawFruits(backgroundImage) {
-        botCtx.drawImage(backgroundImage, 0, 0,Botcanvaswidth, Botcanvasheight);
+        botCtx.drawImage(backgroundImage, 0, 0,botCanvas.width, botCanvas.height);
    
        fruits.forEach((fruit, index) => {
             fruit.update();
             fruit.draw(botCtx);
-            if (fruit.y > Botcanvasheight) {
+            if (fruit.y > botCanvas.height) {
                fruits.splice(index, 1);
                 if(fruit.spriteindex !=0){
                     if(!fruit.isSliced){
