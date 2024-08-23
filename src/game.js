@@ -120,15 +120,18 @@ Playercanvas.addEventListener('touchstart', (event) => {
     isTouchStarted=true;
 
 });
-Playercanvas.addEventListener('touchend',(event)=>{
-    touchEnd =event.touches[0];
-    isTouchStarted=false;
-});
 Playercanvas.addEventListener('touchmove', (event) => {
     if (isTouchStarted) {  
-        player.handleSlice(touchStart.x, touchStart.y, touchEnd.x, touchEnd.y);
+        const touch = event.touches[0];
+        player.handleSlice(touchStart.pageX, touchStart.pageY, touch.pageX, touch.y);
     }
 });
+Playercanvas.addEventListener('touchend', (event) => {
+    
+    isTouchStarted=true;
+
+});
+
 
 // starting game
 SinglePlayerBtn.addEventListener('click', function(){
