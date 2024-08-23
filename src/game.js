@@ -1,8 +1,7 @@
-
 import { Bot, botscore } from "./bot.js";
 import { Player, Playerscore } from "./player.js";
 import { body, scoreDisplay, UI } from "./onUI.js";
-const base = document.getElementById('base');
+
 export const Playercanvas = document.getElementById('gameCanvas');
 Playercanvas.width =(window.innerWidth-100);
 Playercanvas.height = (window.innerHeight);
@@ -116,10 +115,10 @@ Playercanvas.addEventListener('mousemove', (event) => {
 Playercanvas.addEventListener('touchstart', (event) => {
     
     touchStart = event.touches[0];
-    player.handleSlice(touchStart.pageX, touchStart.pageY, 0, 0);
 
 
-});Playercanvas.addEventListener('touchmove', (event) => {
+});
+Playercanvas.addEventListener('touchmove', (event) => {
     
     
     if(isTouchStarted){
@@ -127,11 +126,9 @@ Playercanvas.addEventListener('touchstart', (event) => {
         player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
     }
 
-
-
-});Playercanvas.addEventListener('touchend', (event) => {
+});
+Playercanvas.addEventListener('touchend', (event) => {
     isTouchStarted=false
-
 
 });
 
