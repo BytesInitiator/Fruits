@@ -5,7 +5,7 @@ import { body, scoreDisplay, UI } from "./onUI.js";
 const base = document.getElementById('base');
 export const Playercanvas = document.getElementById('gameCanvas');
 Playercanvas.width =(window.innerWidth-100);
-Playercanvas.height = (window.innerHeight-100);
+Playercanvas.height = (window.innerHeight);
 export const Playercanvaswidth=Playercanvas.width;
 export const Playercanvasheight=Playercanvas.height;
 export const playerCtx =Playercanvas.getContext('2d');
@@ -14,7 +14,7 @@ export const botCanvas = document.getElementById('bot-canvas');
 botCanvas.width =window.innerWidth;
 botCanvas.height = window.innerHeight;
 export const Botcanvaswidth=(Playercanvas.width-100);
-export const Botcanvasheight=(Playercanvas.height-100);
+export const Botcanvasheight=(Playercanvas.height);
 export const botCtx =botCanvas.getContext('2d');
 
 //ui Elements
@@ -151,6 +151,7 @@ function singlePlayerGame() {
         start.currentTime = 0;
         start.play();
         isMultiPlayer=false;
+
         ui.onSinglePlayer();
         enterFullscreen();
         
@@ -172,6 +173,7 @@ function multiPlayerGame() {
         isStarted = true;
         start.currentTime = 0;
         start.play();
+
         enterFullscreen();
 
         ui.onMultiplayer();
