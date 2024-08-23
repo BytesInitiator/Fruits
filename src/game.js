@@ -124,10 +124,9 @@ Playercanvas.addEventListener('touchend',(event)=>{
     touchEnd =event.touches[0];
     isTouchStarted=false;
 });
-Playercanvas.addEventListener('mousemove', (event) => {
+Playercanvas.addEventListener('touchmove', (event) => {
     if (isTouchStarted) {  
         player.handleSlice(touchStart.x, touchStart.y, touchEnd.x, touchEnd.y);
-        fxList.push(new SlashFX(touchStart.x, touchStart.y, touchEnd.x, touchEnd.y));
     }
 });
 
