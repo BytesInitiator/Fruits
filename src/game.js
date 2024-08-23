@@ -2,7 +2,7 @@
 import { Bot, botscore } from "./bot.js";
 import { Player, Playerscore } from "./player.js";
 import { body, scoreDisplay, UI } from "./onUI.js";
-
+const base = document.getElementById('base');
 export const Playercanvas = document.getElementById('gameCanvas');
 Playercanvas.width =(window.innerWidth-100);
 Playercanvas.height = (window.innerHeight-100);
@@ -137,6 +137,7 @@ function singlePlayerGame() {
         start.play();
         isMultiPlayer=false;
         ui.onSinglePlayer();
+        enterFullscreen();
         
         resetLives();
         player.reset();
@@ -156,6 +157,7 @@ function multiPlayerGame() {
         isStarted = true;
         start.currentTime = 0;
         start.play();
+        enterFullscreen();
 
         ui.onMultiplayer();
 
@@ -299,9 +301,9 @@ function toggleMute() {
         muteButton.style.backgroundImage='url(public/unmute.png';
 
     }}
-    function openFullscreen() {
+    function enterFullscreen() {
         let elem = document.documentElement; // This targets the entire document (web page)
-        
+    
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         } else if (elem.mozRequestFullScreen) { // Firefox
@@ -315,5 +317,5 @@ function toggleMute() {
     
     // Automatically trigger fullscreen when the page loads
     window.onload = function() {
-        openFullscreen();
+        enterFullscreen();
     };
