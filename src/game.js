@@ -119,7 +119,22 @@ Playercanvas.addEventListener('touchstart', (event) => {
     player.handleSlice(touchStart.pageX, touchStart.pageY, 0, 0);
 
 
+});Playercanvas.addEventListener('touchmove', (event) => {
+    
+    
+    if(isTouchStarted){
+        const touchNew = event.touches[0];
+        player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
+    }
+
+
+
+});Playercanvas.addEventListener('touchend', (event) => {
+    isTouchStarted=false
+
+
 });
+
 
 
 // starting game
