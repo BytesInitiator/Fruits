@@ -145,7 +145,7 @@ function singlePlayerGame() {
         clearInterval(PlayergameInterval);
         clearInterval(BotgameInterval);
         ui.onSinglePlayer();
-        //enterFullscreen();
+        enterFullscreen();
         resetLives();
         player.reset();
         bot.reset();
@@ -164,7 +164,7 @@ function multiPlayerGame() {
         start.play();
         clearInterval(PlayergameInterval);
         clearInterval(BotgameInterval)
-        //enterFullscreen();
+        enterFullscreen();
         ui.onMultiplayer();
         player.reset();
         bot.reset();
