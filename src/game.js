@@ -106,33 +106,29 @@ Playercanvas.addEventListener('mouseup', () => {
 Playercanvas.addEventListener('mousemove', (event) => {
     if (isMouseDown) {
         const currentMousePosition = { x: event.clientX, y: event.clientY };
-        player.handleSlice(currentMousePosition.x, currentMousePosition.y, lastMousePosition.x, lastMousePosition.y);
+        if(isStarted){
+            player.handleSlice(currentMousePosition.x, currentMousePosition.y,lastMousePosition.x , lastMousePosition.y);
+        }
+       
         lastMousePosition = currentMousePosition;
     }
 });
 
 
 Playercanvas.addEventListener('touchstart', (event) => {
-    
     touchStart = event.touches[0];
-
-
 });
 Playercanvas.addEventListener('touchmove', (event) => {
-    
-    
     if(isTouchStarted){
         const touchNew = event.touches[0];
-        player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
+        if(isStarted){
+            player.handleSlice(touchStart.pageX, touchStart.pageY,touchNew.pageX , touchNew.pageY);
+        }
     }
-
 });
 Playercanvas.addEventListener('touchend', (event) => {
     isTouchStarted=false
-
 });
-
-
 
 // starting game
 SinglePlayerBtn.addEventListener('click', function(){
@@ -162,12 +158,13 @@ function singlePlayerGame() {
         BotgameInterval = setInterval(bot.spawnFruit, 1500);//spawing in every 1.5sec
         isSpectating=false;
         gameLoop();
+        isStarted=true;
 }
 }
 function multiPlayerGame() {
     isMultiPlayer=true;
     if (!isStarted) {
-        isStarted = true;
+        
         start.currentTime = 0;
         start.play();
 
@@ -186,6 +183,7 @@ function multiPlayerGame() {
         isSpectating=false;
         
         gameLoop();
+        isStarted = true;
 }
 }
 
@@ -201,6 +199,7 @@ export function gameOver(){ // if players game is over
     playerCtx.clearRect(0, 0, Playercanvas.width, Playercanvas.height);
     botCtx.clearRect(0, 0, botCanvas.width, botCanvas.height);
     isMultiPlayer=false;
+    isStarted = false;
     
 }
 export function botgameOver(ctx){ // if bots game is over
@@ -208,6 +207,7 @@ export function botgameOver(ctx){ // if bots game is over
     ui.onBotGameover();
     ctx.clearRect(0, 0, botCanvas.width, botCanvas.height);
     botgameisOver = true;
+    isStarted=false;
     
 }
 
