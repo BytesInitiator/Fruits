@@ -8,12 +8,11 @@ body{
     background-image: url(Bgg.png);
     background-color: none;
     background-size: 100% 100%;
-
     background-attachment: fixed;
     background-position: center;
     z-index: 0;
     overflow: hidden;
-    cursor: url(katana.png), url(katana.png);
+    
    
 }
 ::-webkit-scrollbar
@@ -23,6 +22,7 @@ body{
 }
 #gameContainer{
     overflow: hidden;
+    cursor: url(katana.png);
 
     
 }

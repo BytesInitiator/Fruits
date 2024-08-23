@@ -4,16 +4,15 @@ import { Player, Playerscore } from "./player.js";
 import { body, scoreDisplay, UI } from "./onUI.js";
 
 export const Playercanvas = document.getElementById('gameCanvas');
-Playercanvas.width =1450;
-Playercanvas.height = 650;
+Playercanvas.width =window.innerWidth;
+Playercanvas.height = window.innerHeight;
 export const Playercanvaswidth=Playercanvas.width;
 export const Playercanvasheight=Playercanvas.height;
 export const playerCtx =Playercanvas.getContext('2d');
 
 export const botCanvas = document.getElementById('bot-canvas');
-botCanvas.width =1450;
-botCanvas.height = 650;
-
+botCanvas.width =window.innerWidth;
+botCanvas.height = window.innerHeight;
 export const Botcanvaswidth=Playercanvas.width;
 export const Botcanvasheight=Playercanvas.height;
 export const botCtx =botCanvas.getContext('2d');
@@ -123,7 +122,7 @@ Playercanvas.addEventListener('touchstart', (event) => {
 Playercanvas.addEventListener('touchmove', (event) => {
     if (isTouchStarted) {  
         const touch = event.touches[0];
-        player.handleSlice(touchStart.pageX, touchStart.pageY, touch.pageX, touch.y);
+        player.handleSlice(touchStart.pageX, touchStart.pageY, touch.pageX, touch.pageY);
     }
 });
 Playercanvas.addEventListener('touchend', (event) => {
@@ -148,7 +147,7 @@ function singlePlayerGame() {
         start.play();
         isMultiPlayer=false;
         ui.onSinglePlayer();
-
+        
         resetLives();
         player.reset();
         bot.reset();
