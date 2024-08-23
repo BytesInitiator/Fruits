@@ -13,6 +13,7 @@ body{
     background-position: center;
     z-index: 0;
     overflow: hidden;
+    cursor: url(katana.png), url(katana.png);
    
 }
 ::-webkit-scrollbar
@@ -22,7 +23,7 @@ body{
 }
 #gameContainer{
     overflow: hidden;
-    cursor: pointer;
+
     
 }
 

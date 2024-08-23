@@ -113,7 +113,7 @@ Playercanvas.addEventListener('mousemove', (event) => {
 
 Playercanvas.addEventListener('touchstart', (event) => {
     const touch = event.touches[0];
-    player.handleSlice(touch.clientX, touch.clientY);
+    player.handleSlice(touch.clientX, touch.clientY,0,0);
 });
 
 // starting game
@@ -292,5 +292,4 @@ function toggleMute() {
         over.volume=1;  // Set volume back to normal
         muteButton.style.backgroundImage='url(public/unmute.png';
 
-    }
-}
+    }}
