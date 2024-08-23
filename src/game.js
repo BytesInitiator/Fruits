@@ -4,8 +4,8 @@ import { Player, Playerscore } from "./player.js";
 import { body, scoreDisplay, UI } from "./onUI.js";
 
 export const Playercanvas = document.getElementById('gameCanvas');
-Playercanvas.width =window.innerWidth;
-Playercanvas.height = window.innerHeight;
+Playercanvas.width =(window.innerWidth-100);
+Playercanvas.height = (window.innerHeight-100);
 export const Playercanvaswidth=Playercanvas.width;
 export const Playercanvasheight=Playercanvas.height;
 export const playerCtx =Playercanvas.getContext('2d');
@@ -13,8 +13,8 @@ export const playerCtx =Playercanvas.getContext('2d');
 export const botCanvas = document.getElementById('bot-canvas');
 botCanvas.width =window.innerWidth;
 botCanvas.height = window.innerHeight;
-export const Botcanvaswidth=Playercanvas.width;
-export const Botcanvasheight=Playercanvas.height;
+export const Botcanvaswidth=(Playercanvas.width-100);
+export const Botcanvasheight=(Playercanvas.height-100);
 export const botCtx =botCanvas.getContext('2d');
 
 //ui Elements
@@ -116,18 +116,8 @@ Playercanvas.addEventListener('mousemove', (event) => {
 Playercanvas.addEventListener('touchstart', (event) => {
     
     touchStart = event.touches[0];
-    isTouchStarted=true;
+    player.handleSlice(touchStart.pageX, touchStart.pageY, 0, 0);
 
-});
-Playercanvas.addEventListener('touchmove', (event) => {
-    if (isTouchStarted) {  
-        const touch = event.touches[0];
-        player.handleSlice(touchStart.pageX, touchStart.pageY, touch.pageX, touch.pageY);
-    }
-});
-Playercanvas.addEventListener('touchend', (event) => {
-    
-    isTouchStarted=true;
 
 });
 
