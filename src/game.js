@@ -45,6 +45,9 @@ let PlayergameInterval;
 let BotgameInterval;
 let animationFrameId;
 let lastMousePosition = { x: 0, y: 0 };
+let touchStart;
+let touchEnd;
+let isTouchStarted=false;
 
 let isMouseDown = true;
 let isStarted = false;
@@ -112,8 +115,20 @@ Playercanvas.addEventListener('mousemove', (event) => {
 
 
 Playercanvas.addEventListener('touchstart', (event) => {
-    const touch = event.touches[0];
-    player.handleSlice(touch.clientX, touch.clientY,0,0);
+    
+    touchStart = event.touches[0];
+    isTouchStarted=true;
+
+});
+Playercanvas.addEventListener('touchend',(event)=>{
+    touchEnd =event.touches[0];
+    isTouchStarted=false;
+});
+Playercanvas.addEventListener('mousemove', (event) => {
+    if (isTouchStarted) {  
+        player.handleSlice(touchStart.x, touchStart.y, touchEnd.x, touchEnd.y);
+        fxList.push(new SlashFX(touchStart.x, touchStart.y, touchEnd.x, touchEnd.y));
+    }
 });
 
 // starting game
