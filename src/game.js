@@ -1,76 +1,62 @@
 
 import { Bot, botscore } from "./bot.js";
 import { Player, Playerscore } from "./player.js";
+import { body, scoreDisplay, UI } from "./onUI.js";
 
 export const Playercanvas = document.getElementById('gameCanvas');
-Playercanvas.width = window.innerWidth-30;
-Playercanvas.height = window.innerHeight;
+Playercanvas.width =1450;
+Playercanvas.height = 650;
 export const Playercanvaswidth=Playercanvas.width;
 export const Playercanvasheight=Playercanvas.height;
 export const playerCtx =Playercanvas.getContext('2d');
 
 export const botCanvas = document.getElementById('bot-canvas');
-botCanvas.width = window.innerWidth-30;
-botCanvas.height = window.innerHeight;
+botCanvas.width =1450;
+botCanvas.height = 650;
 
 export const Botcanvaswidth=Playercanvas.width;
 export const Botcanvasheight=Playercanvas.height;
 export const botCtx =botCanvas.getContext('2d');
 
-const body = document.getElementById('body');
-
+//ui Elements
 const SinglePlayerBtn = document.getElementById('singlePlayer');
 const MultiPlayerBtn = document.getElementById('multiPlayer');
-const gameOverMessage = document.getElementById('gameOverMessage');
-const livesImg = document.getElementById('lives');
-const scoreText = document.getElementById('scoreText');
-export const BotscoreText = document.getElementById('BotscoreText');
 const x1 = document.getElementById('x1');
 const x2 = document.getElementById('x2');
 const x3 = document.getElementById('x3');
-const bottom = document.getElementById('bottom');
-const menu = document.getElementById('menu');
-const winnerText = document.getElementById('winner');
 const muteButton = document.getElementById('mute');
+export const spectateButton = document.getElementById('spectate-button');
 
+//sounds
 const boom = document.getElementById('boom');
 const spliced = document.getElementById('spliced');
 const missed = document.getElementById('missed');
 const start = document.getElementById('start');
 const over = document.getElementById('over');
 
-
 const backgroundImage = new Image();
 backgroundImage.src = 'BG.png';
-
 const splash = new Image();
 splash.src = 'public/splash.png';
 splash.opacity=0.5;
 
-
 export let fxList = [];
-
-
 let PlayergameInterval;
 let BotgameInterval;
 let animationFrameId;
-
-let isMouseDown = true;
 let lastMousePosition = { x: 0, y: 0 };
 
+let isMouseDown = true;
 let isStarted = false;
 export let isSpectating = false;
-let isSinglePlayer = false;
-let isMultiPlayer = false;
-export let botgameisOver = false
-const spectateButton = document.getElementById('spectate-button');
+export let isMultiPlayer = false;
+export let botgameisOver = false;
+let isMuted = false; 
+
 
 const bot = new Bot(botCanvas,500, 0.6); // initializig bot
 const player = new Player(spliced);
-const started = false;
-let isMuted = false; 
-
-export const scoreDisplay = document.getElementById('scoreDisplay');
+const ui = new UI();
 
 
 function updateGame() { //update at each frame
@@ -139,22 +125,12 @@ MultiPlayerBtn.addEventListener('click', function(){
 });
 
 function singlePlayerGame() {
-    isSinglePlayer=true;
+    isMultiPlayer=false;
     if (!isStarted) {
         start.currentTime = 0;
         start.play();
         isMultiPlayer=false;
-        winnerText.style.display = 'none';
-        BotscoreText.style.display='none';
-        menu.style.display = 'none';
-        gameOverMessage.style.display = 'none';
-        bottom.style.display = 'flex';
-        scoreDisplay.style.display='inline';
-        livesImg.style.display='flex';
-        body.style.backgroundImage='none'
-        body.style.backgroundColor='black';
-        scoreDisplay.textContent = `Score: ${Playerscore}`;
-        spectateButton.style.display='none';
+        ui.onSinglePlayer();
 
         resetLives();
         player.reset();
@@ -175,17 +151,7 @@ function multiPlayerGame() {
         start.currentTime = 0;
         start.play();
 
-        menu.style.display = 'none';
-        gameOverMessage.style.display = 'none';
-        bottom.style.display = 'flex';
-        scoreDisplay.style.display='inline';
-        livesImg.style.display='flex';
-        body.style.backgroundImage='none';
-        body.style.backgroundColor='black';
-        winnerText.style.display = 'inline';
-        BotscoreText.style.display='inline';
-        scoreDisplay.textContent = `Score: ${Playerscore}`;
-        spectateButton.style.display='flex';
+        ui.onMultiplayer();
 
         player.reset();
         bot.reset();
@@ -208,43 +174,16 @@ export function gameOver(){ // if players game is over
     clearInterval(BotgameInterval);
     cancelAnimationFrame(animationFrameId); 
     isStarted = false;
-    let pscore = Playerscore;
-    let bscore= botscore;
-    scoreDisplay.textContent = `Score: ${Playerscore}`;
-    menu.style.display = 'flex';
-    gameOverMessage.style.display = 'block';
-    scoreText.textContent=`Score: ${Playerscore}`;
-    bottom.style.display = 'none';
-    body.style.backgroundImage='url(BG.png)'
-    body.style.backgroundColor='none';
+    ui.onGameover();
 
     playerCtx.clearRect(0, 0, Playercanvas.width, Playercanvas.height);
     botCtx.clearRect(0, 0, botCanvas.width, botCanvas.height);
-   
-    
-    if(isMultiPlayer){
-        BotscoreText.textContent=` opponents Score: ${botscore}`;
-        if(Playerscore>botscore){
-
-        winnerText.textContent='You win';
-        }else
-        {
-        winnerText.textContent='Opponent wins';
-        }
-    }else{
-        BotscoreText.textContent=" ";
-        winnerText.textContent='';
-
-    }
-    
-    isSinglePlayer=false;
     isMultiPlayer=false;
     
 }
 export function botgameOver(ctx){ // if bots game is over
     clearInterval(BotgameInterval);
-    scoreDisplay.textContent = `Score: ${Playerscore}`;
-    BotscoreText.textContent=`Opponents Score: ${botscore}`;
+    ui.onBotGameover();
     ctx.clearRect(0, 0, botCanvas.width, botCanvas.height);
     botgameisOver = true;
     

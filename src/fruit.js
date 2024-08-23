@@ -1,4 +1,4 @@
-import { Playercanvas, scoreDisplay } from "./game.js";
+import { Playercanvas } from "./game.js";
 import { Playerscore } from "./player.js";
 
 const fruitSprites = [

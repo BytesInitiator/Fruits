@@ -1,6 +1,6 @@
 
 import { Fruit, loadedSprites } from './fruit.js';
-import { Botcanvasheight, Botcanvaswidth, botCtx, botgameOver, BotscoreText, fxList, isSpectating, SlashFX } from './game.js';
+import { Botcanvasheight, Botcanvaswidth, botCtx, botgameOver, fxList, isSpectating, SlashFX } from './game.js';
 
 
 let fruits = [];
