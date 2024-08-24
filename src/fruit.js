@@ -44,7 +44,7 @@ export class Fruit {
         this.radius = rad;
         this.spriteindex =spriteindex;
         this.sprite =loadedSprites[this.spriteindex];
-        this.spriteLeft=loadedSliced[spriteindex];
+        this.spriteLeft=loadedSliced[this.spriteindex];
         this.spriteRight;
         this.isSliced = false;
         this.boom = boom;
@@ -83,7 +83,13 @@ export class Fruit {
             boom.currentTime = 0;
             boom.play();
             
-        }else{
+        }else if(this.spriteindex==7){
+            this.isSliced=true
+            boom.currentTime = 0;
+            boom.play();
+            
+        }
+        else{
             this.isSliced = true;  
             scoreDisplay.textContent = `Score: ${Playerscore}`;
 

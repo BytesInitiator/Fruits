@@ -6,7 +6,7 @@ import { botCanvas, botCtx, botgameOver, fxList, isSpectating, SlashFX, splash }
 let fruits = [];
 export var botscore=0;
 export class Bot {
-    constructor(canvas,reactionTime, accuracy) {
+    constructor(reactionTime, accuracy) {
 
         this.reactionTime = reactionTime;
         this.accuracy = accuracy;
@@ -41,21 +41,31 @@ export class Bot {
             if (Math.random() < this.accuracy && this.currentTarget && !this.currentTarget.isSliced) {
                 const i = Math.floor(Math.random() * 20)
                 if(i>=19){
-                    if(this.currentTarget.spriteindex==0 || this.spriteindex==7){
+                    if(this.currentTarget.spriteindex==0){
                         this.currentTarget.slice();
-                        botgameOver(botCtx);
+                        botgameOver();
+                    }
+                    else if(this.currentTarget.spriteindex==7){
+                        this.currentTarget.slice();
+                        botgameOver();
                     }
                 }else{
-                    if(this.currentTarget.spriteindex!=0){
+                    if(this.currentTarget.spriteindex!=0 ){
                         this.currentTarget.slice();
                         botscore+=10;
                         this.currentTarget.isSliced=true;
                         BotscoreText.textContent=`Score: ${botscore}`;
                         if(isSpectating){
                             this.fxList.push(new SlashFX(this.currentTarget.x, this.currentTarget.y,this.currentTarget.x+100,this.currentTarget.y+100));
-                        }
-        
-                        
+                        }    
+                    }else if( this.currentTarget.spriteindex!=7){
+                        this.currentTarget.slice();
+                        botscore+=10;
+                        this.currentTarget.isSliced=true;
+                        BotscoreText.textContent=`Score: ${botscore}`;
+                        if(isSpectating){
+                            this.fxList.push(new SlashFX(this.currentTarget.x, this.currentTarget.y,this.currentTarget.x+100,this.currentTarget.y+100));
+                        }    
                     }
                 }
                 
@@ -88,7 +98,7 @@ export class Bot {
             x = Math.random() * botCanvas.width;
             y = botCanvas.height-100; 
             initialVelocityX = Math.floor(Math.random() * (5 + 4 + 1)) - 4
-            initialVelocityY = -(Math.random() * (a - b + 1)) + b;
+            initialVelocityY =  -(Math.floor(Math.random() * (a - b + 1)) + b);
         } /*else if (side === 1) {
     
             x = 50; 
@@ -112,7 +122,7 @@ export class Bot {
             fruit.draw(botCtx);
             if (fruit.y > botCanvas.height) {
                fruits.splice(index, 1);
-                if(fruit.spriteindex !=0){
+                if(fruit.spriteindex !=0 || fruit.spriteindex !=7){
                     if(!fruit.isSliced){
                         this.lives -=0.5;
                         this.HandleBotlives();
@@ -126,7 +136,7 @@ export class Bot {
         }
          HandleBotlives(){
             if(this.lives == 0){
-              botgameOver(botCtx);
+              botgameOver();
            }
            
 

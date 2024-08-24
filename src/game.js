@@ -59,10 +59,12 @@ export let botgameisOver = false;
 let isMuted = false; 
 
 
-const bot = new Bot(botCanvas,1000, 0.6); // initializig bot
+const bot = new Bot(500, 0.6); // initializig bot
 const player = new Player(spliced);
 const ui = new UI();
 
+const maxTrailLength = 20; // Number of trail segments
+const trail = [];
 
     
 fullscreenBtn.addEventListener('click', () => { 
@@ -74,8 +76,10 @@ function update() { //update at each frame
     
     player.updateAndDrawFruits(backgroundImage);
     if(isMultiPlayer){
-       bot.updateAndDrawFruits(backgroundImage);
+        bot.updateAndDrawFruits(backgroundImage);
     }
+    
+    
 }
 
 
@@ -87,12 +91,21 @@ function updateGame() {
             fxList.splice(index, 1); 
         }
     });
+    trail.forEach((t,index)=>{
+        t.drawTrail(playerCtx);
+        if (t.isFinished()) {
+            trail.splice(index, 1); 
+        }
+    });
     if(isMultiPlayer){
         bot.update();
-     }
+    }
+    
+    
     if(isSpectating){
         scoreDisplay.textContent=`Score: ${botscore}`;
         body.style.backgroundColor='#a01b00';
+        
 
     
     }else{
@@ -114,8 +127,10 @@ Playercanvas.addEventListener('mouseup', () => {
 Playercanvas.addEventListener('mousemove', (event) => {
     if (isMouseDown) {
         const currentMousePosition = { x: event.clientX, y: event.clientY };
+        trail.push(new SlashFX(lastMousePosition.x,lastMousePosition.y,currentMousePosition.x,currentMousePosition.y));
         if(isStarted){player.handleSlice(currentMousePosition.x, currentMousePosition.y,lastMousePosition.x , lastMousePosition.y);}
         lastMousePosition = currentMousePosition;
+        
     }
 });
 
@@ -208,7 +223,6 @@ export function gameOver(){ // if players game is over
     isStarted = false;
     ui.onGameover();
     playerCtx.clearRect(0, 0, Playercanvas.width, Playercanvas.height);
-    botCtx.clearRect(0, 0, botCanvas.width, botCanvas.height);
     if(isMultiPlayer){
         BotscoreText.textContent=` opponents Score: ${botscore}`;
         if(Playerscore>botscore){
@@ -229,10 +243,10 @@ export function gameOver(){ // if players game is over
     isStarted = false;
     
 }
-export function botgameOver(ctx){ // if bots game is over
+export function botgameOver(){ // if bots game is over
     clearInterval(BotgameInterval);
     ui.onBotGameover();
-    ctx.clearRect(0, 0, botCanvas.width, botCanvas.height);
+    botCtx.clearRect(0, 0, botCanvas.width, botCanvas.height);
     botgameisOver = true;
 
     
@@ -276,6 +290,22 @@ export class SlashFX { // Drawing fx
          //drawing splash
          ctx.drawImage(splash, this.fx, this.fy,100,100 );
 
+    }
+    drawTrail(){
+        playerCtx.save();
+        playerCtx.globalAlpha = this.opacity;
+        playerCtx.strokeStyle = 'rgba(40,16,9,0.7)'; 
+        playerCtx.lineWidth = this.lineWidth;
+        playerCtx.lineCap = 'round';
+        playerCtx.beginPath();
+        playerCtx.moveTo(this.x1, this.y1);
+        playerCtx.lineTo(this.x2, this.y2);
+        playerCtx.stroke();
+        playerCtx.restore();
+
+        
+        this.opacity -= this.fadeSpeed/1000;
+        this.lineWidth -= 0.5;
     }
 
     isFinished() {
@@ -359,13 +389,21 @@ function toggleMute() {
         }
     }
     function setCanvas(){
-    Playercanvas.width =(window.innerWidth-100);
+    Playercanvas.width =(window.innerWidth-50);
     Playercanvas.height = (window.innerHeight-50);
-    botCanvas.width =(window.innerWidth-100);
+    botCanvas.width =(window.innerWidth-50);
     botCanvas.height = window.innerHeight-50;
     }   
     function Random(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function drawTrail(x, y) {
+        Touchtrail.push({ x, y });
+        if (trail.length > maxTrailLength) {
+            trail.shift();
+        }
+        playerCtx.beginPath();
+        
     }
         
     

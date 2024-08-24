@@ -11,9 +11,7 @@ const x3 = document.getElementById('x3');
 export class Player {
     constructor( sliceSound) {
         this.spliced = sliceSound;
-        
-        this.lives=3;
-        
+        this.lives=3;  
     }
 
     handleSlice(x1, y1, x2, y2) {
@@ -21,17 +19,17 @@ export class Player {
             if (!fruit.isSliced) {
                 
                 const dist = pointToLineDistance(fruit.x, fruit.y, x1, y1, x2, y2);
-                if (dist < fruit.radius+10) {
+                if (dist < fruit.radius+5) {
                     fruits.slice();
                     spliced.currentTime = 0;
                     spliced.play();
-                    if(fruit.spriteindex==0|| this.spriteindex==7){
-                        gameOver(playerCtx,Playercanvas);
+                    if(fruit.spriteindex==0){
+                        gameOver();
+                    }else if(fruit.spriteindex==7){
+                        gameOver();
                     }else{
                         Playerscore+=10;
-
-                        fruit.isSliced = true;
-                   
+                        fruit.isSliced = true;                  
                     }
                     fxList.push(new SlashFX(x1, y1, x2+100, y2,fruit.x,fruit.y));
                     
@@ -92,7 +90,7 @@ export class Player {
             fruit.draw(playerCtx);
             if ( fruit.y > Playercanvas.height) {
                 fruits.splice(index, 1);
-                if( fruit.spriteindex !=0){
+                if( fruit.spriteindex !=0|| fruit.spriteindex !=7){
                     if(!fruit.isSliced){
                         this.lives -=0.5;
                         this.HandlePlayerlives();
@@ -114,7 +112,7 @@ export class Player {
                 x1.style.backgroundImage='url(public/xx1.png)';
                 x2.style.backgroundImage='url(public/xx2.png)';
                 x3.style.backgroundImage='url(public/xx3.png)';
-                gameOver(playerCtx,Playercanvas);
+                gameOver();
             }
             
         }
