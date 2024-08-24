@@ -180,6 +180,7 @@ function singlePlayerGame() {
         player.reset();
         bot.reset();
         Playercanvas.style.display = 'inline';
+        Playercanvas.style.cursor='none';
         PlayergameInterval = setInterval(player.spawnFruit, Random(400,600));//spawing in every 1.5sec
         BotgameInterval = setInterval(bot.spawnFruit, Random(400,600));//spawing in every 1.5sec
         isSpectating=false;
@@ -204,6 +205,7 @@ function multiPlayerGame() {
         resetLives();
         Playercanvas.style.display = 'inline';
         botCanvas.style.display = 'none';
+        Playercanvas.style.cursor='none';
         PlayergameInterval = setInterval(player.spawnFruit, Random(400,600));//spawing in every 1.5sec
         BotgameInterval = setInterval(bot.spawnFruit,  Random(400,600));
         isSpectating=false;
@@ -223,6 +225,7 @@ export function gameOver(){ // if players game is over
     isStarted = false;
     ui.onGameover();
     playerCtx.clearRect(0, 0, Playercanvas.width, Playercanvas.height);
+    Playercanvas.style.cursor='auto';
     if(isMultiPlayer){
         BotscoreText.textContent=` opponents Score: ${botscore}`;
         if(Playerscore>botscore){

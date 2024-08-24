@@ -1,9 +1,4 @@
-html{
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
+
 body{
     display: flex;
     flex-direction: column;
@@ -30,13 +25,17 @@ body{
 
 #gameContainer{
     top: 0;
-    cursor: url(katana.png),pointer;
+
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    
+   
 }
-
+#gameCanvas{
+    cursor: auto;
+}
 
 #scoreDisplay {
     align-items: center;

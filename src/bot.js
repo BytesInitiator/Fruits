@@ -40,25 +40,13 @@ export class Bot {
         setTimeout(() => {
             if (Math.random() < this.accuracy && this.currentTarget && !this.currentTarget.isSliced) {
                 const i = Math.floor(Math.random() * 20)
-                if(i>=19){
-                    if(this.currentTarget.spriteindex==0){
-                        this.currentTarget.slice();
-                        botgameOver();
-                    }
-                    else if(this.currentTarget.spriteindex==7){
+                if(i>19){
+                    if(this.currentTarget.spriteindex==0 || this.currentTarget.spriteindex==7){
                         this.currentTarget.slice();
                         botgameOver();
                     }
                 }else{
-                    if(this.currentTarget.spriteindex!=0 ){
-                        this.currentTarget.slice();
-                        botscore+=10;
-                        this.currentTarget.isSliced=true;
-                        BotscoreText.textContent=`Score: ${botscore}`;
-                        if(isSpectating){
-                            this.fxList.push(new SlashFX(this.currentTarget.x, this.currentTarget.y,this.currentTarget.x+100,this.currentTarget.y+100));
-                        }    
-                    }else if( this.currentTarget.spriteindex!=7){
+                    if(this.currentTarget.spriteindex!=0 && this.currentTarget.spriteindex!=7 ){
                         this.currentTarget.slice();
                         botscore+=10;
                         this.currentTarget.isSliced=true;
@@ -122,7 +110,7 @@ export class Bot {
             fruit.draw(botCtx);
             if (fruit.y > botCanvas.height) {
                fruits.splice(index, 1);
-                if(fruit.spriteindex !=0 || fruit.spriteindex !=7){
+                if(fruit.spriteindex !=0 && fruit.spriteindex !=7 ){
                     if(!fruit.isSliced){
                         this.lives -=0.5;
                         this.HandleBotlives();

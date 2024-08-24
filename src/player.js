@@ -90,7 +90,7 @@ export class Player {
             fruit.draw(playerCtx);
             if ( fruit.y > Playercanvas.height) {
                 fruits.splice(index, 1);
-                if( fruit.spriteindex !=0|| fruit.spriteindex !=7){
+                if( fruit.spriteindex !=0 && fruit.spriteindex !=7 ){
                     if(!fruit.isSliced){
                         this.lives -=0.5;
                         this.HandlePlayerlives();
