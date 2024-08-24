@@ -70,10 +70,17 @@ export class Bot {
         let x, y, initialVelocityX, initialVelocityY,sprite;
         let spriteindex= Math.floor(Math.random() * loadedSprites.length);
         let rad;
+        let a;
+        let b;
+        
         if(window.innerWidth>950){
             rad=60;
+            a=12;
+            b=11;
         }else{
             rad=40;
+            a=8;
+            b=7;
         }
     
         if (side === 0) {
@@ -81,7 +88,7 @@ export class Bot {
             x = Math.random() * botCanvas.width;
             y = botCanvas.height-100; 
             initialVelocityX = Math.floor(Math.random() * (5 + 4 + 1)) - 4
-            initialVelocityY = -(Math.floor(Math.random() * (11 - 10 + 1)) + 10);
+            initialVelocityY = -(Math.random() * (a - b + 1)) + b;
         } /*else if (side === 1) {
     
             x = 50; 

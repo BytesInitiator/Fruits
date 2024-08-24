@@ -1,6 +1,6 @@
 import { Bot, botscore } from "./bot.js";
 import { Player, Playerscore } from "./player.js";
-import { body, scoreDisplay, UI } from "./onUI.js";
+import { body, BotscoreText, scoreDisplay, UI, winnerText } from "./onUI.js";
 
 export const Playercanvas = document.getElementById('gameCanvas');
 export const playerCtx =Playercanvas.getContext('2d');
@@ -164,8 +164,8 @@ function singlePlayerGame() {
         resetLives();
         player.reset();
         bot.reset();
-        PlayergameInterval = setInterval(player.spawnFruit, Random(500,600));//spawing in every 1.5sec
-        BotgameInterval = setInterval(bot.spawnFruit, Random(500,600));//spawing in every 1.5sec
+        PlayergameInterval = setInterval(player.spawnFruit, Random(600,700));//spawing in every 1.5sec
+        BotgameInterval = setInterval(bot.spawnFruit, Random(600,700));//spawing in every 1.5sec
         isSpectating=false;
         updategame = setInterval(updateGame,16);
         fullscreenBtn.style.display='none';
@@ -187,8 +187,8 @@ function multiPlayerGame() {
         bot.reset();
         resetLives();
         botCanvas.style.display = 'none';
-        PlayergameInterval = setInterval(player.spawnFruit, Random(500,600));//spawing in every 1.5sec
-        BotgameInterval = setInterval(bot.spawnFruit,  Random(500,600));
+        PlayergameInterval = setInterval(player.spawnFruit, Random(600,700));//spawing in every 1.5sec
+        BotgameInterval = setInterval(bot.spawnFruit,  Random(600,700));
         isSpectating=false;
         updategame = setInterval(updateGame,16);
         fullscreenBtn.style.display='none';
@@ -205,9 +205,24 @@ export function gameOver(){ // if players game is over
     cancelAnimationFrame(animationFrameId); 
     isStarted = false;
     ui.onGameover();
-
     playerCtx.clearRect(0, 0, Playercanvas.width, Playercanvas.height);
     botCtx.clearRect(0, 0, botCanvas.width, botCanvas.height);
+    if(isMultiPlayer){
+        BotscoreText.textContent=` opponents Score: ${botscore}`;
+        if(Playerscore>botscore){
+
+        winnerText.textContent='You win';
+        }else if(Playerscore<botscore)
+        {
+        winnerText.textContent='Opponent wins';
+        }else{
+            winnerText.textContent='Its a tie';
+        }
+    }else{
+        BotscoreText.textContent=" ";
+        winnerText.textContent=" ";
+
+    }
     isMultiPlayer=false;
     isStarted = false;
     

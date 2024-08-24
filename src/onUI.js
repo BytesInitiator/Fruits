@@ -34,22 +34,8 @@ export class UI{
         scoreText.textContent=`Score: ${Playerscore}`;
         body.style.backgroundImage='url(BG.png)'
         body.style.backgroundColor='none';
-        if(isMultiPlayer){
-            BotscoreText.textContent=` opponents Score: ${botscore}`;
-            if(Playerscore>botscore){
-    
-            winnerText.textContent='You win';
-            }else if(Playerscore<botscore)
-            {
-            winnerText.textContent='Opponent wins';
-            }else{
-                winnerText.textContent='Its a tie';
-            }
-        }else{
-            BotscoreText.textContent=" ";
-            winnerText.textContent=" ";
-    
-        }
+        winnerText.style.display='inline';
+        
 
     }
     onBotGameover(){
