@@ -164,7 +164,7 @@ function singlePlayerGame() {
         resetLives();
         player.reset();
         bot.reset();
-        Playercanvas.style.display = 'block';
+        Playercanvas.style.display = 'inline';
         PlayergameInterval = setInterval(player.spawnFruit, Random(400,600));//spawing in every 1.5sec
         BotgameInterval = setInterval(bot.spawnFruit, Random(400,600));//spawing in every 1.5sec
         isSpectating=false;
@@ -187,7 +187,7 @@ function multiPlayerGame() {
         player.reset();
         bot.reset();
         resetLives();
-        Playercanvas.style.display = 'block';
+        Playercanvas.style.display = 'inline';
         botCanvas.style.display = 'none';
         PlayergameInterval = setInterval(player.spawnFruit, Random(400,600));//spawing in every 1.5sec
         BotgameInterval = setInterval(bot.spawnFruit,  Random(400,600));
@@ -314,10 +314,10 @@ spectateButton.addEventListener('click', () => { // spactate button
     isSpectating = !isSpectating;
     if (isSpectating) {
         Playercanvas.style.display = 'none';
-        botCanvas.style.display = 'block';
+        botCanvas.style.display = 'inline';
         spectateButton.textContent = 'Return to Game';
     } else {
-        Playercanvas.style.display = 'block';
+        Playercanvas.style.display = 'inline';
         botCanvas.style.display = 'none';
         spectateButton.textContent = 'Spectate';
     }
