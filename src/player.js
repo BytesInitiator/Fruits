@@ -21,7 +21,7 @@ export class Player {
             if (!fruit.isSliced) {
                 
                 const dist = pointToLineDistance(fruit.x, fruit.y, x1, y1, x2, y2);
-                if (dist < fruit.radius) {
+                if (dist < fruit.radius+10) {
                     fruits.slice();
                     spliced.currentTime = 0;
                     spliced.play();
@@ -49,24 +49,27 @@ export class Player {
         let initialVelocityY=0;
         let spriteindex= Math.floor(Math.random() * loadedSprites.length);
         
-    
         if (side === 0) {
-    
+            initialVelocityX=0;
+            initialVelocityY=0;
             x = Math.random() *Playercanvas.width;
             y =  Playercanvas.height-100; 
-            initialVelocityX = Math.floor(Math.random() * (12 - 11 + 1)) + 11;
-            initialVelocityY = -(Math.floor(Math.random() * (12 - 11 + 1)) + 11);; 
+            initialVelocityX = Math.floor(Math.random() * (5 - 4 + 1)) + 4;
+            initialVelocityY = -(Math.floor(Math.random() * (7 - 6 + 1)) + 6);; 
         } else if (side === 1) {
-    
+            initialVelocityX=0;
+            initialVelocityY=0;
             x = 50; 
             y = (Math.random() *  Playercanvas.height)-100;
-            initialVelocityX = (5 + Math.random() * 10);
-            initialVelocityY = -(Math.random() * 10);
+            initialVelocityX = (5 + Math.random() * 3);
+            initialVelocityY = -(Math.random() * 7);
         } else {
+            initialVelocityX=0;
+            initialVelocityY=0;
             x = Playercanvas.width-50; 
             y = (Math.random() *Playercanvas.height)-100;
-            initialVelocityX = (5 + Math.random() * 10); 
-            initialVelocityY = -(Math.random() * 10);
+            initialVelocityX = (5 + Math.random() * 3); 
+            initialVelocityY = -(Math.random() * 7);
         }
         fruits.push(new Fruit(x, y, initialVelocityX, initialVelocityY,spriteindex));
     }

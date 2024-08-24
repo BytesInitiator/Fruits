@@ -303,4 +303,18 @@ body{
         width: 25px;
         height: 25px;
     }
+    #scoreText{
+        top: 30px;
+        font-size: 30px;
+
+    }
+    #BotscoreText{
+
+        font-size: 30px;
+
+    }
+    #winner{
+        font-size: 30px;
+
+    }
 }

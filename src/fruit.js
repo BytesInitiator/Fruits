@@ -39,7 +39,7 @@ export class Fruit {
         this.velocityX = initialVelocityX;
         this.velocityY = initialVelocityY;
         this.gravity = 0.2; 
-        this.radius = 50;
+        this.radius = 40;
         this.spriteindex =spriteindex;
         this.sprite =loadedSprites[this.spriteindex];
         this.spriteLeft=loadedSliced[spriteindex];
@@ -51,9 +51,9 @@ export class Fruit {
 
     draw(ctx) {
         if (!this.isSliced) {
-            ctx.drawImage(this.sprite, this.x - this.radius, this.y - this.radius, this.radius * 2.5, this.radius * 2.5);
+            ctx.drawImage(this.sprite, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
         }else if(this.isSliced){
-            ctx.drawImage(this.spriteLeft, this.x - this.radius, this.y - this.radius, this.radius * 2.5, this.radius * 2.5);
+            ctx.drawImage(this.spriteLeft, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
             
         }
     }

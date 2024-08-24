@@ -31,9 +31,11 @@ const over = document.getElementById('over');
 
 const backgroundImage = new Image();
 backgroundImage.src = 'BG.png';
+
 backgroundImage.addEventListener('selectstart', function(event) {
     event.preventDefault(); // Prevent selection in some browsers
 });
+
 const splash = new Image();
 splash.src = 'public/splash.png';
 splash.opacity=0.5;
@@ -41,6 +43,7 @@ splash.opacity=0.5;
 export let fxList = [];
 let PlayergameInterval;
 let BotgameInterval;
+let updategame;
 let animationFrameId;
 let lastMousePosition = { x: 0, y: 0 };
 let touchStart;
@@ -55,16 +58,15 @@ export let botgameisOver = false;
 let isMuted = false; 
 
 
-const bot = new Bot(botCanvas,500, 0.6); // initializig bot
+const bot = new Bot(botCanvas,1000, 0.6); // initializig bot
 const player = new Player(spliced);
 const ui = new UI();
 
 
-Playercanvas.addEventListener('selectstart', function(event) {
-    event.preventDefault();
-});
+    
 
-function updateGame() { //update at each frame
+
+function update() { //update at each frame
     
     player.updateAndDrawFruits(backgroundImage);
     if(isMultiPlayer){
@@ -75,10 +77,8 @@ function updateGame() { //update at each frame
 
 
 
-function gameLoop() {
-    updateGame();
-    animationFrameId = requestAnimationFrame(gameLoop);
-
+function updateGame() {
+    update();
     fxList.forEach((fx, index) => {
         fx.draw(playerCtx);
         if (fx.isFinished()) {
@@ -137,9 +137,11 @@ Playercanvas.addEventListener('touchend', (event) => {
 // starting game
 SinglePlayerBtn.addEventListener('click', function(){
     singlePlayerGame();
+    
 });
 MultiPlayerBtn.addEventListener('click', function(){
     multiPlayerGame();
+    
 });
 
 function singlePlayerGame() {
@@ -156,10 +158,10 @@ function singlePlayerGame() {
         resetLives();
         player.reset();
         bot.reset();
-        PlayergameInterval = setInterval(player.spawnFruit, 700);//spawing in every 1.5sec
-        BotgameInterval = setInterval(bot.spawnFruit, 700);//spawing in every 1.5sec
+        PlayergameInterval = setInterval(player.spawnFruit, 900);//spawing in every 1.5sec
+        BotgameInterval = setInterval(bot.spawnFruit, 900);//spawing in every 1.5sec
         isSpectating=false;
-        gameLoop();
+        updategame = setInterval(updateGame,16);
         isStarted=true;
 }
 }
@@ -177,10 +179,10 @@ function multiPlayerGame() {
         bot.reset();
         resetLives();
         botCanvas.style.display = 'none';
-        PlayergameInterval = setInterval(player.spawnFruit, 700);//spawing in every 1.5sec
-        BotgameInterval = setInterval(bot.spawnFruit, 700);
+        PlayergameInterval = setInterval(player.spawnFruit, 900);//spawing in every 1.5sec
+        BotgameInterval = setInterval(bot.spawnFruit, 900);
         isSpectating=false;
-        gameLoop();
+        updategame = setInterval(updateGame,16);
         isStarted = true;
 }
 }
@@ -190,6 +192,7 @@ export function gameOver(){ // if players game is over
     over.play();
     clearInterval(PlayergameInterval);
     clearInterval(BotgameInterval);
+    clearInterval(updategame);
     cancelAnimationFrame(animationFrameId); 
     isStarted = false;
     ui.onGameover();
