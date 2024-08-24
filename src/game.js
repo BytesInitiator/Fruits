@@ -31,6 +31,9 @@ const over = document.getElementById('over');
 
 const backgroundImage = new Image();
 backgroundImage.src = 'BG.png';
+backgroundImage.addEventListener('selectstart', function(event) {
+    event.preventDefault(); // Prevent selection in some browsers
+});
 const splash = new Image();
 splash.src = 'public/splash.png';
 splash.opacity=0.5;
@@ -56,6 +59,10 @@ const bot = new Bot(botCanvas,500, 0.6); // initializig bot
 const player = new Player(spliced);
 const ui = new UI();
 
+
+Playercanvas.addEventListener('selectstart', function(event) {
+    event.preventDefault();
+});
 
 function updateGame() { //update at each frame
     

@@ -1,4 +1,9 @@
-
+html{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
 body{
     display: flex;
     flex-direction: column;
@@ -22,10 +27,15 @@ body{
     width: 0px;
     height: 0px;
 }
+
 #gameContainer{
     cursor: url(katana.png),pointer;
-    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
+
 
 #scoreDisplay {
     align-items: center;
@@ -261,7 +271,7 @@ body{
         background-size: 100% 100%;
     }
     #menu{
-        top: 45%;
+        top: 20%;
         left: 0%;
         gap: 50%;
     }
@@ -284,7 +294,7 @@ body{
     }
     #mutepanel{
 
-        top: 25%;
+        top: 2%;
         left: 20%;
         gap: 5px;
     
