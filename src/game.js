@@ -21,6 +21,7 @@ const x2 = document.getElementById('x2');
 const x3 = document.getElementById('x3');
 const muteButton = document.getElementById('mute');
 export const spectateButton = document.getElementById('spectate-button');
+const fullscreenBtn = document.getElementById('fullscreen');
 
 //sounds
 const boom = document.getElementById('boom');
@@ -64,7 +65,10 @@ const ui = new UI();
 
 
     
-
+fullscreenBtn.addEventListener('click', () => { 
+    enterFullscreen();
+    fullscreenBtn.style.display='none';
+})
 
 function update() { //update at each frame
     
@@ -73,8 +77,6 @@ function update() { //update at each frame
        bot.updateAndDrawFruits(backgroundImage);
     }
 }
-
-
 
 
 function updateGame() {
@@ -153,6 +155,7 @@ function singlePlayerGame() {
         isMultiPlayer=false;
         clearInterval(PlayergameInterval);
         clearInterval(BotgameInterval);
+        ui.onGameStart();
         ui.onSinglePlayer();
         enterFullscreen();
         resetLives();
@@ -162,6 +165,7 @@ function singlePlayerGame() {
         BotgameInterval = setInterval(bot.spawnFruit, 900);//spawing in every 1.5sec
         isSpectating=false;
         updategame = setInterval(updateGame,16);
+        fullscreenBtn.style.display='none';
         isStarted=true;
 }
 }
@@ -174,6 +178,7 @@ function multiPlayerGame() {
         clearInterval(PlayergameInterval);
         clearInterval(BotgameInterval)
         enterFullscreen();
+        ui.onGameStart();
         ui.onMultiplayer();
         player.reset();
         bot.reset();
@@ -183,6 +188,7 @@ function multiPlayerGame() {
         BotgameInterval = setInterval(bot.spawnFruit, 900);
         isSpectating=false;
         updategame = setInterval(updateGame,16);
+        fullscreenBtn.style.display='none';
         isStarted = true;
 }
 }
@@ -334,5 +340,8 @@ function toggleMute() {
     Playercanvas.height = (window.innerHeight-50);
     botCanvas.width =(window.innerWidth-100);
     botCanvas.height = window.innerHeight-50;
-    }
+    }   
+        
+    
+    
     

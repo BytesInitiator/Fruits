@@ -50,22 +50,19 @@ export class Player {
         let spriteindex= Math.floor(Math.random() * loadedSprites.length);
         
         if (side === 0) {
-            initialVelocityX=0;
-            initialVelocityY=0;
+
             x = Math.random() *Playercanvas.width;
             y =  Playercanvas.height-100; 
             initialVelocityX = Math.floor(Math.random() * (5 - 4 + 1)) + 4;
-            initialVelocityY = -(Math.floor(Math.random() * (7 - 6 + 1)) + 6);; 
+            initialVelocityY = -(Math.floor(Math.random() * (7 - 6 + 1)) + 6);
         } else if (side === 1) {
-            initialVelocityX=0;
-            initialVelocityY=0;
+           
             x = 50; 
             y = (Math.random() *  Playercanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 3);
             initialVelocityY = -(Math.random() * 7);
         } else {
-            initialVelocityX=0;
-            initialVelocityY=0;
+           
             x = Playercanvas.width-50; 
             y = (Math.random() *Playercanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 3); 

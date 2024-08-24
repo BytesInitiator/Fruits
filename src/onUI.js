@@ -10,33 +10,21 @@ export const BotscoreText = document.getElementById('BotscoreText');
 export const menu = document.getElementById('menu');
 export const winnerText = document.getElementById('winner');
 export const scoreDisplay = document.getElementById('scoreDisplay');
+export const hint = document.getElementById('hint');
 
 export class UI{
 
 
     onSinglePlayer(){
-        winnerText.style.display = 'none';
         BotscoreText.style.display='none';
-        menu.style.display = 'none';
-        gameOverMessage.style.display = 'none';
-        scoreDisplay.style.display='inline';
-        livesImg.style.display='flex';
-        body.style.backgroundImage='none'
-        body.style.backgroundColor='black';
-        scoreDisplay.textContent = `Score: ${Playerscore}`;
         spectateButton.style.display='none';
     }
     onMultiplayer(){
-        menu.style.display = 'none';
-        gameOverMessage.style.display = 'none';
-        scoreDisplay.style.display='inline';
-        livesImg.style.display='flex';
-        body.style.backgroundImage='none';
-        body.style.backgroundColor='black';
-        winnerText.style.display = 'inline';
-        BotscoreText.style.display='inline';
-        scoreDisplay.textContent = `Score: ${Playerscore}`;
+
         spectateButton.style.display='flex';
+        BotscoreText.style.display='inline';
+        winnerText.style.display = 'inline';
+        winnerText.style.display = 'none';  
 
     }
     onGameover(){
@@ -69,4 +57,14 @@ export class UI{
         BotscoreText.textContent=`Opponents Score: ${botscore}`;
     }
 
+    onGameStart(){
+        menu.style.display = 'none';
+        gameOverMessage.style.display = 'none';
+        scoreDisplay.style.display='inline';
+        livesImg.style.display='flex';
+        body.style.backgroundImage='none';
+        body.style.backgroundColor='black';
+        scoreDisplay.textContent = `Score: ${Playerscore}`;
+        hint.style.display='none';
+    }
 }

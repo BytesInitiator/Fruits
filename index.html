@@ -18,13 +18,14 @@
             <img src="public/multiPlayerBtn.png" alt="">
         </button>     
     </div>
-    
+   
     <div id="scoreDisplay">
         <img src="public/Score.png" alt="">Score: 0
         <img src="public/Score.png" alt="">Opponent: 0
        
+       
     </div>
-
+    <div id="hint">if not LandScape then do LandScape your Device And reload the page</div>
     <div id="gameOverMessage">
         <div id="gameOverText">
             <div id="scoreText">"</div> 
@@ -32,7 +33,7 @@
             <div id="winner">"</div>
         </div>
     </div>
-
+    
     <div id="mutepanel"><button id="mute"></button></div>
             <div id="lives">
                 
@@ -41,10 +42,14 @@
                 <div id="x2"></div> 
                 <div id="x3"></div> 
             </div>
+            
 
-    <div id="gameContainer">       
-        <canvas id="gameCanvas"></canvas>
-        <canvas id="bot-canvas"></canvas>     
+    <div id="gameContainer">      
+         
+        <canvas id="gameCanvas"></canvas>  
+        <button id="fullscreen">Enter Fullscreen</button>  
+        <canvas id="bot-canvas"></canvas>  
+         
     </div> 
 
     <audio id="boom" src="sounds/boom.mp3"></audio>

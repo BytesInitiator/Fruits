@@ -74,19 +74,19 @@ export class Bot {
     
             x = Math.random() * botCanvas.width;
             y = botCanvas.height-100; 
-            initialVelocityX = (5 + Math.random() * 7);
-            initialVelocityY = -(Math.floor(Math.random() * (12 - 11 + 1)) + 11);; 
+            initialVelocityX = Math.floor(Math.random() * (5 - 4 + 1)) + 4;
+            initialVelocityY = -(Math.floor(Math.random() * (7 - 6 + 1)) + 6); 
         } else if (side === 1) {
     
             x = 50; 
             y = (Math.random() * botCanvas.height)-100;
-            initialVelocityX = (5 + Math.random() * 7);
-            initialVelocityY = -(Math.random() * 12);
+            initialVelocityX = (5 + Math.random() * 3);
+            initialVelocityY = -(Math.random() * 7);
         } else {
             x =botCanvas.width-50; 
             y = (Math.random() * botCanvas.height)-100;
-            initialVelocityX = (5 + Math.random() * 7); 
-            initialVelocityY = -(Math.random() * 12);
+            initialVelocityX = (5 + Math.random() * 3); 
+            initialVelocityY = -(Math.random() * 7);
         }
         fruits.push(new Fruit(x, y, initialVelocityX, initialVelocityY,spriteindex));
         
