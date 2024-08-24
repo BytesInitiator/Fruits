@@ -121,7 +121,10 @@ Playercanvas.addEventListener('mousemove', (event) => {
 
 
 Playercanvas.addEventListener('touchstart', (event) => {
+    
     touchStart = event.touches[0];
+    isTouchStarted=true;
+
 });
 Playercanvas.addEventListener('touchmove', (event) => {
     if(isTouchStarted){
