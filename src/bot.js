@@ -1,6 +1,6 @@
 
 import { Fruit, loadedSprites } from './fruit.js';
-import { botCanvas, botCtx, botgameOver, fxList, isSpectating, SlashFX } from './game.js';
+import { botCanvas, botCtx, botgameOver, fxList, isSpectating, SlashFX, splash } from './game.js';
 
 
 let fruits = [];
@@ -54,6 +54,7 @@ export class Bot {
                         if(isSpectating){
                             this.fxList.push(new SlashFX(this.currentTarget.x, this.currentTarget.y,this.currentTarget.x+100,this.currentTarget.y+100));
                         }
+        
                         
                     }
                 }

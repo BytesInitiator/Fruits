@@ -37,7 +37,7 @@ backgroundImage.addEventListener('selectstart', function(event) {
     event.preventDefault(); // Prevent selection in some browsers
 });
 
-const splash = new Image();
+export const splash = new Image();
 splash.src = 'public/splash.png';
 splash.opacity=0.5;
 
@@ -229,11 +229,13 @@ function resetLives(){
 
 export class SlashFX { // Drawing fx
     
-    constructor(x1, y1, x2, y2) {
+    constructor(x1, y1, x2, y2,fx,fy) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
+        this.fx =fx;
+        this.fy=fy
         this.opacity = 1.0; 
         this.fadeSpeed = 0.1;
         this.lineWidth = 10; 
@@ -252,9 +254,10 @@ export class SlashFX { // Drawing fx
         ctx.restore();
 
         
-        this.opacity -= this.fadeSpeed/10000;
+        this.opacity -= this.fadeSpeed/1000;
         this.lineWidth -= 0.5;
-        ctx.drawImage(splash, this.x1, this.y1,150,150 ); //drawing splash
+         //drawing splash
+         ctx.drawImage(splash, this.fx, this.fy,100,100 );
 
     }
 

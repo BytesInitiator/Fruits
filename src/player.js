@@ -1,6 +1,6 @@
 
 import { Fruit, loadedSprites } from './fruit.js';
-import { gameOver, Playercanvas, SlashFX, fxList, playerCtx, pointToLineDistance } from './game.js';
+import { gameOver, Playercanvas, SlashFX, fxList, playerCtx, pointToLineDistance, splash } from './game.js';
 
 let fruits=[];
 export var Playerscore=0;
@@ -33,7 +33,8 @@ export class Player {
                         fruit.isSliced = true;
                    
                     }
-                    fxList.push(new SlashFX(x1, y1, x2+100, y2));
+                    fxList.push(new SlashFX(x1, y1, x2+100, y2,fruit.x,fruit.y));
+                    
                     
                 }
     
