@@ -33,13 +33,13 @@ export const loadedSliced = SlicedSprites.map(src => {
 });
 
 export class Fruit {
-    constructor(x, y, initialVelocityX, initialVelocityY,spriteindex) {
+    constructor(x, y, initialVelocityX, initialVelocityY,spriteindex,rad) {
         this.x = x;
         this.y = y;
         this.velocityX = initialVelocityX;
         this.velocityY = initialVelocityY;
         this.gravity = 0.2; 
-        this.radius = 40;
+        this.radius = rad;
         this.spriteindex =spriteindex;
         this.sprite =loadedSprites[this.spriteindex];
         this.spriteLeft=loadedSliced[spriteindex];

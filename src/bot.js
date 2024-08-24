@@ -69,15 +69,20 @@ export class Bot {
         const side = Math.floor(Math.random() * 2);
         let x, y, initialVelocityX, initialVelocityY,sprite;
         let spriteindex= Math.floor(Math.random() * loadedSprites.length);
-        
+        let rad;
+        if(window.innerWidth>950){
+            rad=60;
+        }else{
+            rad=40;
+        }
     
         if (side === 0) {
     
             x = Math.random() * botCanvas.width;
             y = botCanvas.height-100; 
-            initialVelocityX = Math.floor(Math.random() * (5 - 4 + 1)) + 4;
-            initialVelocityY = -(Math.floor(Math.random() * (7 - 6 + 1)) + 6); 
-        } else if (side === 1) {
+            initialVelocityX = Math.floor(Math.random() * (5 + 4 + 1)) - 4
+            initialVelocityY = -(Math.floor(Math.random() * (11 - 10 + 1)) + 10);
+        } /*else if (side === 1) {
     
             x = 50; 
             y = (Math.random() * botCanvas.height)-100;
@@ -88,8 +93,8 @@ export class Bot {
             y = (Math.random() * botCanvas.height)-100;
             initialVelocityX = (5 + Math.random() * 3); 
             initialVelocityY = -(Math.random() * 7);
-        }
-        fruits.push(new Fruit(x, y, initialVelocityX, initialVelocityY,spriteindex));
+        }*/
+        fruits.push(new Fruit(x, y, initialVelocityX, initialVelocityY,spriteindex,rad));
         
     }
     updateAndDrawFruits(backgroundImage) {

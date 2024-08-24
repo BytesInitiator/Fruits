@@ -164,8 +164,8 @@ function singlePlayerGame() {
         resetLives();
         player.reset();
         bot.reset();
-        PlayergameInterval = setInterval(player.spawnFruit, 900);//spawing in every 1.5sec
-        BotgameInterval = setInterval(bot.spawnFruit, 900);//spawing in every 1.5sec
+        PlayergameInterval = setInterval(player.spawnFruit, Random(500,600));//spawing in every 1.5sec
+        BotgameInterval = setInterval(bot.spawnFruit, Random(500,600));//spawing in every 1.5sec
         isSpectating=false;
         updategame = setInterval(updateGame,16);
         fullscreenBtn.style.display='none';
@@ -187,8 +187,8 @@ function multiPlayerGame() {
         bot.reset();
         resetLives();
         botCanvas.style.display = 'none';
-        PlayergameInterval = setInterval(player.spawnFruit, 900);//spawing in every 1.5sec
-        BotgameInterval = setInterval(bot.spawnFruit, 900);
+        PlayergameInterval = setInterval(player.spawnFruit, Random(500,600));//spawing in every 1.5sec
+        BotgameInterval = setInterval(bot.spawnFruit,  Random(500,600));
         isSpectating=false;
         updategame = setInterval(updateGame,16);
         fullscreenBtn.style.display='none';
@@ -347,6 +347,9 @@ function toggleMute() {
     botCanvas.width =(window.innerWidth-100);
     botCanvas.height = window.innerHeight-50;
     }   
+    function Random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
         
     
     
