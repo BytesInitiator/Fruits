@@ -1,5 +1,4 @@
 
-
 body{
     display: flex;
     flex-direction: column;
@@ -11,7 +10,9 @@ body{
     background-size: 100% 100%;
     background-attachment: fixed;
     background-position: center;
+    background-repeat: no-repeat;
     z-index: 0;
+    overflow: hidden;
     
     
    
@@ -23,6 +24,7 @@ body{
 }
 #gameContainer{
     cursor: url(katana.png),pointer;
+    overflow: hidden;
 }
 
 #scoreDisplay {
@@ -252,5 +254,43 @@ body{
     border-radius: 30px;
     &:hover{
         opacity: 1;
+    }
+}
+@media only screen and (max-width: 950px) {
+    body{
+        background-size: 100% 100%;
+    }
+    #menu{
+        top: 45%;
+        left: 0%;
+        gap: 50%;
+    }
+    #singlePlayer {
+
+        width: 30%;
+        height: 30%;  
+        img{
+            width: 70%;
+            height: 70%;
+        }   
+    }
+    #multiPlayer{
+        width: 30%;
+        height: 30%;  
+        img{
+            width: 70%;
+            height: 70%;
+        }  
+    }
+    #mutepanel{
+
+        top: 25%;
+        left: 20%;
+        gap: 5px;
+    
+    }
+    #mute{
+        width: 25px;
+        height: 25px;
     }
 }
