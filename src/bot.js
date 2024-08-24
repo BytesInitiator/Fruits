@@ -38,7 +38,7 @@ export class Bot {
 
     attemptSlice() {
         setTimeout(() => {
-            if (Math.random() < this.accuracy && this.currentTarget && !this.currentTarget.isSliced) {
+            if ((Math.random()*100) < this.accuracy && this.currentTarget && !this.currentTarget.isSliced) {
                 const i = Math.floor(Math.random() * 20)
                 if(i>19){
                     if(this.currentTarget.spriteindex==0 || this.currentTarget.spriteindex==7){

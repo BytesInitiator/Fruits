@@ -59,7 +59,7 @@ export let botgameisOver = false;
 let isMuted = false; 
 
 
-const bot = new Bot(500, 0.6); // initializig bot
+const bot = new Bot(500, 5); // initializig bot
 const player = new Player(spliced);
 const ui = new UI();
 
