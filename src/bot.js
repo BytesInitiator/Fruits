@@ -41,7 +41,7 @@ export class Bot {
             if (Math.random() < this.accuracy && this.currentTarget && !this.currentTarget.isSliced) {
                 const i = Math.floor(Math.random() * 20)
                 if(i>=19){
-                    if(this.currentTarget.spriteindex==0){
+                    if(this.currentTarget.spriteindex==0 || this.spriteindex==7){
                         this.currentTarget.slice();
                         botgameOver(botCtx);
                     }

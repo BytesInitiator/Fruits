@@ -25,7 +25,7 @@ export class Player {
                     fruits.slice();
                     spliced.currentTime = 0;
                     spliced.play();
-                    if(fruit.spriteindex==0){
+                    if(fruit.spriteindex==0|| this.spriteindex==7){
                         gameOver(playerCtx,Playercanvas);
                     }else{
                         Playerscore+=10;

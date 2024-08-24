@@ -2,13 +2,14 @@ import { Playercanvas } from "./game.js";
 import { Playerscore } from "./player.js";
 
 const fruitSprites = [
-    "public/fruits/boom.png",
-    "public/fruits/apple.png",
-    "public/fruits/avocado.png",
-    "public/fruits/bananas.png",
-    "public/fruits/mango.png",
-    "public/fruits/orange.png",
-    "public/fruits/strawberry.png"
+    "public/fruits/boom.png",//0
+    "public/fruits/apple.png",//1
+    "public/fruits/avocado.png",//2
+    "public/fruits/bananas.png",//3
+    "public/fruits/mango.png",//4
+    "public/fruits/orange.png",//5
+    "public/fruits/strawberry.png",//6,
+    "public/fruits/boom.png"//7
 ];
 const SlicedSprites = [
     "public/fruits/boom-1.png",
@@ -17,7 +18,8 @@ const SlicedSprites = [
     "public/fruits/bananas-1.png",
     "public/fruits/mango-1.png",
     "public/fruits/orange-1.png",
-    "public/fruits/strawberry-1.png",
+    "public/fruits/strawberry-1.png", 
+    "public/fruits/boom-1.png"
 ];
 const boom = document.getElementById('boom');
     
@@ -76,7 +78,7 @@ export class Fruit {
     }
 
     slice() {
-        if(this.spriteindex==0){
+        if(this.spriteindex==0 || this.spriteindex==7){
             this.isSliced=true
             boom.currentTime = 0;
             boom.play();
