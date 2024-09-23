@@ -1,2 +1,2 @@
-# Fruit Slice
-https://bytesinitiator.github.io/Fruits/
+# Fruit Slice(Azmaan)
+play: https://bytesinitiator.github.io/Fruits/
